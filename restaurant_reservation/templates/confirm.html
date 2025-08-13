@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reservation Confirmed</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.8);
+      min-height: 100vh;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      color: #f39c12;
+    }
+    .details {
+      margin: 20px 0;
+      text-align: left;
+      line-height: 1.8;
+    }
+    .details strong {
+      color: #f1c40f;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #e67e22;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+    .btn:hover {
+      background: #d35400;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>✅ Reservation Confirmed!</h1>
+      <div class="details">
+        <p><strong>Name:</strong> {{ res.name }}</p>
+        <p><strong>Date:</strong> {{ res.date.strftime('%Y-%m-%d') }}</p>
+        <p><strong>Time:</strong> {{ res.date.strftime('%H:%M') }} – {{ res.end_time }}</p>
+        <p><strong>Party Size:</strong> {{ res.party_size }}</p>
+        <p><strong>Table Assigned:</strong> #{{ res.table_id }} ({{ table.seats }}-seater)</p>
+      </div>
+      <a href="/" class="btn">Make Another Reservation</a>
+    </div>
+  </div>
+</body>
+</html>

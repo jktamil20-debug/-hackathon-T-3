@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.85);
+      min-height: 100vh;
+      padding: 40px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+    }
+    h1 {
+      text-align: center;
+      color: #f39c12;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      color: #ecf0f1;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #444;
+    }
+    th {
+      background-color: #e67e22;
+      color: white;
+    }
+    tr:hover {
+      background-color: rgba(230, 126, 34, 0.2);
+    }
+    .cancel-btn {
+      color: #e74c3c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .cancel-btn:hover {
+      color: #c0392b;
+    }
+    .back {
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+      color: #f39c12;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>📋 Admin: Reservations</h1>
+      <a href="/" class="back">← Back to Reservation</a>
+
+      {% if reservations %}
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Party Size</th>
+              <th>Table</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in reservations %}
+              <tr>
+                <td>{{ r.name }}</td>
+                <td>{{ r.date_str }}</td>
+                <td>{{ r.time_str }} – {{ r.end_time }}</td>
+                <td>{{ r.party_size }}</td>
+                <td>{{ r.table_id }}</td>
+                <td><a href="/cancel/{{ r['_id'] }}" class="cancel-btn">Cancel</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p style="text-align:center; margin-top:30px;">No active reservations.</p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

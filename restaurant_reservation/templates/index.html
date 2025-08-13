@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reserve a Table</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding: 40px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      text-align: center;
+      color: #d35400;
+      font-size: 2.2em;
+    }
+    label {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #bdc3c7;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    button {
+      background-color: #e67e22;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #d35400;
+    }
+    .error {
+      color: #c0392b;
+      font-weight: bold;
+      text-align: center;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #ecf0f1;
+    }
+    .footer a {
+      color: #f39c12;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>🍽️ Reserve Your Table</h1>
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+      <form method="POST">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="time">Time</label>
+        <select id="time" name="time" required>
+          <option value="">Select a time</option>
+          {% for slot in slots %}
+            <option value="{{ slot.value }}">{{ slot.label }}</option>
+          {% endfor %}
+        </select>
+
+        <label for="party_size">Party Size</label>
+        <input type="number" id="party_size" name="party_size" min="1" max="6" required />
+
+        <button type="submit">Reserve Table</button>
+      </form>
+    </div>
+    <div class="footer">
+      <a href="/admin">Admin View</a>
+    </div>
+  </div>
+</body>
+</html>
